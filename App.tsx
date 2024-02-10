@@ -1,13 +1,17 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
+import {Provider} from 'react-redux';
 import HomeNavigationStack from './src/navigation/navigationStacks';
+import Store from './src/redux/store';
 
-function App(): React.JSX.Element {
+const App = () => {
   return (
-    <NavigationContainer>
-      <HomeNavigationStack />
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <HomeNavigationStack />
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
 
 export default App;
