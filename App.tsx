@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {Text} from 'react-native';
+import HomeNavigationStack from './src/navigation/navigationStacks';
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Text>aaaaaaaaaaaaaaaa</Text>
+      <HomeNavigationStack />
     </NavigationContainer>
   );
 }
