@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
   filledButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 4,
     backgroundColor: COLORS.blue200,
+    alignContent: 'center',
+    height: 40,
   },
   disabledButtonContainer: {
     justifyContent: 'center',
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     opacity: 0.8,
     backgroundColor: COLORS.grey300,
+    height: 40,
   },
 });
 
