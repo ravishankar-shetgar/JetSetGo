@@ -13,7 +13,9 @@ enum COLORS {
   grey100 = '#ebebeb',
   grey200 = '#adb0b2',
   grey300 = '#898e8c',
-  black = '#000',
+  black = '#0C090A',
+  screenBg = '#F7F7F7',
+  errorRed = '#FF5959',
 }
 
 export default COLORS;
