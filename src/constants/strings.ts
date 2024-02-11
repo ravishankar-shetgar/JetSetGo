@@ -10,6 +10,17 @@ enum STRINGS {
   duration = 'Duration',
   nonStopFlight = 'Non stop flight',
   singleStopFlight = 'One stop flight',
+  selectSeats = 'Select seats',
+  selectedSeat = 'Selected Seat',
+  selectedSeats = 'Selected Seats',
+  dashSymbol = '--',
+  ellipsisSymbol = '...',
+  rupeeSymbol = '₹',
+  bookTicket = 'Book Ticket',
+  noFlightsFound = 'No Flights Found',
+  modifySearchAndTryAgain = 'Please modify your search and try again',
+  bookFlight = 'Book Flight',
+  bookings = 'Bookings',
 }
 
 export default STRINGS;

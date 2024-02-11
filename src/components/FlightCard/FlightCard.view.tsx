@@ -8,6 +8,7 @@ import {
   PlaneIcon,
 } from '../../constants/icons';
 import {AirIndia, SpiceJet} from '../../constants/images';
+import STRINGS from '../../constants/strings';
 import {FlightInfo} from '../../redux/reducers/Flights/Flights.reducer.types';
 import CText from '../CText/CText.view';
 import {styles} from './FlightCard.styles';
@@ -69,7 +70,9 @@ const FlightDuration = ({duration}: {duration: string}) => {
 const FareInfo = ({fare}: {fare: number}) => {
   return (
     <View style={styles.fareInfoView}>
-      <CText variant={'Header6'}>₹ {fare}</CText>
+      <CText variant={'Header6'}>
+        {STRINGS.rupeeSymbol} {fare}
+      </CText>
     </View>
   );
 };

@@ -4,6 +4,7 @@ import React from 'react';
 import COLORS from '../constants/colors';
 import {FONTS} from '../constants/common';
 import {BookingIcon, SearchIcon} from '../constants/icons';
+import STRINGS from '../constants/strings';
 import BookedFlightScreen from '../screens/bookedFlight/BookedFlightScreen';
 import BookingScreen from '../screens/booking/BookingScreen.view';
 import BookingHistoryScreen from '../screens/bookingHistory/BookingHistoryScreen.view';
@@ -44,7 +45,7 @@ const TabNavigationStack = () => {
         name="Home"
         component={HomeNavigationStack}
         options={{
-          tabBarLabel: 'Search',
+          tabBarLabel: STRINGS.search,
           tabBarIcon: renderHomeIcon,
         }}
       />
@@ -52,7 +53,7 @@ const TabNavigationStack = () => {
         name="Bookings"
         component={BookingsNavigationStack}
         options={{
-          tabBarLabel: 'Bookings',
+          tabBarLabel: STRINGS.bookings,
           tabBarIcon: renderBookingIcon,
         }}
       />
@@ -65,7 +66,11 @@ const HomeNavigationStack = () => {
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="SearchResults" component={SearchResultsScreen} />
-      <HomeStack.Screen name="Booking" component={BookingScreen} />
+      <HomeStack.Screen
+        name="Booking"
+        component={BookingScreen}
+        options={{headerShown: true, headerTitle: STRINGS.bookFlight}}
+      />
       <HomeStack.Screen
         name="BookingSuccess"
         component={BookingSuccessScreen}
