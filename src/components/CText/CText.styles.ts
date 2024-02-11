@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
   },
   header6: {
     fontFamily: FONTS.Regular,
+    fontSize: 14,
+    fontWeight: '400',
+    color: COLORS.blue300,
+  },
+  header7: {
+    fontFamily: FONTS.Regular,
     fontSize: 12,
     fontWeight: '400',
     color: COLORS.blue300,

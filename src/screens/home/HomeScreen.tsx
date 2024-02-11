@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import CText from '../../components/CText/CText.view';
+import FlightCard from '../../components/FlightCard/FlightCard.view';
 import Input from '../../components/Input/Input.view';
 import STRINGS from '../../constants/strings';
+import {FlightInfo} from '../../redux/reducers/Flights/Flights.reducer.types';
 import {getAllFlightsData} from '../../redux/selectors';
 import {fetchFlightsAction} from '../../saga/HomeScreen.saga';
 import styles from './HomeScreen.styles';
 
 interface HomeScreenProps {}
+
+const renderListItem = ({item}: {item: FlightInfo}) => {
+  return <FlightCard data={item} />;
+};
+
+const keyExtractor = (data: FlightInfo) => data.id;
+
+const renderSeparator = () => <View style={styles.separator} />;
 
 /**  */
 const HomeScreen: React.FC<HomeScreenProps> = () => {
@@ -36,15 +45,15 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         placeholder={STRINGS.enterDestination}
       />
 
-      <ScrollView>
-        {flights.map(item => {
-          return (
-            <View key={item.id} style={{borderWidth: 1, marginVertical: 8}}>
-              <CText variant="Header6">{JSON.stringify(item)}</CText>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <FlatList
+        renderItem={renderListItem}
+        data={flights}
+        contentContainerStyle={styles.listContentContainer}
+        style={styles.listContainer}
+        keyExtractor={keyExtractor}
+        ItemSeparatorComponent={renderSeparator}
+        keyboardShouldPersistTaps="handled"
+      />
     </View>
   );
 };
