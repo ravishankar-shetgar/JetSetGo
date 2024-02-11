@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import BookedFlightCard from '../../components/BookedFlightCard/BookedFlightCard.view';
+import NoItemsFound from '../../components/NoItemsFound/NoItemsFound.view';
 import {Booking} from '../../redux/reducers/Bookings/Bookings.reducer.types';
 import {getBookedFlights} from '../../redux/selectors';
 import styles from './BookingHistoryScreen.styles';
@@ -30,6 +31,7 @@ const BookingHistoryScreen: React.FC<BookingHistoryScreenProps> = props => {
         keyExtractor={keyExtractor}
         data={bookedFlights}
         ItemSeparatorComponent={renderSeparator}
+        ListEmptyComponent={NoItemsFound}
       />
     </View>
   );

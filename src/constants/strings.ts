@@ -18,7 +18,6 @@ enum STRINGS {
   rupeeSymbol = '₹',
   bookTicket = 'Book Ticket',
   noFlightsFound = 'No Flights Found',
-  modifySearchAndTryAgain = 'Please modify your search and try again',
   bookFlight = 'Book Flight',
   bookings = 'Bookings',
   bookedSeats = 'Booked Seats',
@@ -26,6 +25,7 @@ enum STRINGS {
   bookedDate = 'Booked Date',
   terminalNumber = 'Departure Terminal number',
   airportName = 'Airport name',
+  selectDate = 'Select Date',
 }
 
 export default STRINGS;

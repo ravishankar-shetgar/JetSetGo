@@ -3,8 +3,9 @@
 // can be imported in other files easily.
 
 import AirIndia from '../assets/images/AirIndia.png';
+import AppIcon from '../assets/images/AppIcon.png';
 import Flight from '../assets/images/Flight.jpg';
 import Restrictions from '../assets/images/Restrictions.png';
 import SpiceJet from '../assets/images/SpiceJet.png';
 
-export {AirIndia, Flight, Restrictions, SpiceJet};
+export {AirIndia, AppIcon, Flight, Restrictions, SpiceJet};
