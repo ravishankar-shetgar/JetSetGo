@@ -1,37 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import FlightCard from '../../components/FlightCard/FlightCard.view';
-import FlightCardPlaceholder from '../../components/FlightCardPlaceholder/FlightCardPlaceholder.view';
+import {NavigationProp} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import Button from '../../components/Button/Button.view';
 import Input from '../../components/Input/Input.view';
 import STRINGS from '../../constants/strings';
-import {FlightInfo} from '../../redux/reducers/Flights/Flights.reducer.types';
-import {getAllFlightsData, isLoadingFlights} from '../../redux/selectors';
-import {fetchFlightsAction} from '../../saga/HomeScreen.saga';
+import {HomeNavigationStackType} from '../../navigation/rootNavigation.types';
 import styles from './HomeScreen.styles';
 
-interface HomeScreenProps {}
-
-const renderListItem = ({item}: {item: FlightInfo}) => {
-  return <FlightCard data={item} />;
-};
-
-const keyExtractor = (data: FlightInfo) => data.id;
-
-const renderSeparator = () => <View style={styles.separator} />;
+interface HomeScreenProps {
+  navigation: NavigationProp<HomeNavigationStackType>;
+}
 
 /**  */
-const HomeScreen: React.FC<HomeScreenProps> = () => {
-  const flights = useSelector(getAllFlightsData);
-  const isLoading = useSelector(isLoadingFlights);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFlightsAction());
-  }, []);
+const HomeScreen: React.FC<HomeScreenProps> = props => {
+  const {navigation} = props;
 
   const [sourceInput, setSourceInput] = useState('');
   const [destinationInput, setDestinationInput] = useState('');
+
+  const onPressSearch = () => {
+    navigation.navigate('SearchResults', {userId: ''});
+  };
 
   return (
     <View style={styles.container}>
@@ -47,19 +36,11 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         placeholder={STRINGS.enterDestination}
       />
 
-      {isLoading ? (
-        <FlightCardPlaceholder />
-      ) : (
-        <FlatList
-          renderItem={renderListItem}
-          data={flights}
-          contentContainerStyle={styles.listContentContainer}
-          style={styles.listContainer}
-          keyExtractor={keyExtractor}
-          ItemSeparatorComponent={renderSeparator}
-          keyboardShouldPersistTaps="handled"
-        />
-      )}
+      <Button
+        title={STRINGS.search}
+        onPress={onPressSearch}
+        variant="enabled"
+      />
     </View>
   );
 };

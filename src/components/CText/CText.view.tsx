@@ -53,4 +53,4 @@ const CText = (props: CTextProps) => {
   );
 };
 
-export default React.memo(CText);
+export default CText;

@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 12,
     justifyContent: 'center',
-    borderColor: COLORS.grey200,
+    borderColor: COLORS.grey100,
   },
   flightDateRow: {
     flexDirection: 'row',
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flightDurationView: {
-    backgroundColor: COLORS.lightBlue,
+    backgroundColor: COLORS.lightBlue100,
     borderRadius: 20,
     paddingHorizontal: 12,
     height: 30,
