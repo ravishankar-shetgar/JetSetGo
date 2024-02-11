@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {call, delay, put, take} from 'redux-saga/effects';
+import {call, put, take} from 'redux-saga/effects';
 import {Api} from '../api/api';
 import ENDPOINTS from '../api/endpoints';
 import {ApiResponseType} from '../constants/types';
@@ -28,7 +28,7 @@ export function* onHomeScreen() {
     } else {
       yield put(setFlightsData([]));
     }
-    yield delay(2000); // TODO: remove
+    // yield delay(2000); // TODO: remove
     yield put(unsetIsLoading());
   }
 }

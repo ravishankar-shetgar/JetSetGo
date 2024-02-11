@@ -16,10 +16,23 @@ interface CTextProps extends TextProps {
   variant?: TextVariants;
   color?: COLORS;
   textProps?: TextProps;
+  fontWeight?:
+    | 'normal'
+    | 'bold'
+    | '100'
+    | '200'
+    | '300'
+    | '400'
+    | '500'
+    | '600'
+    | '700'
+    | '800'
+    | '900'
+    | undefined;
 }
 
 const CText = (props: CTextProps) => {
-  const {children, textProps, variant = 'Header1', color} = props;
+  const {children, textProps, variant = 'Header1', color, fontWeight} = props;
 
   let textStyle: StyleProp<TextStyle>;
 
@@ -47,7 +60,13 @@ const CText = (props: CTextProps) => {
   }
 
   return (
-    <RNText {...textProps} style={[textStyle, color ? {color} : {}]}>
+    <RNText
+      {...textProps}
+      style={[
+        textStyle,
+        color ? {color} : {},
+        fontWeight ? {fontWeight: fontWeight} : {},
+      ]}>
       {children}
     </RNText>
   );

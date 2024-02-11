@@ -14,6 +14,7 @@ import {styles} from './FlightCard.styles';
 
 interface FlightCardProps {
   data: FlightInfo;
+  onPress?: () => void;
 }
 
 interface FlightDateProps {
@@ -105,7 +106,7 @@ const FlightLineView = ({stopInfo}: {stopInfo: string}) => {
 };
 
 const FlightCard: React.FC<FlightCardProps> = props => {
-  const {data} = props;
+  const {data, onPress} = props;
 
   if (!data) {
     return null;
@@ -114,7 +115,10 @@ const FlightCard: React.FC<FlightCardProps> = props => {
   const {displayData, fare} = data;
 
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.7}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.container}
+      activeOpacity={0.7}>
       <View style={styles.airlineInfoRow}>
         <View style={styles.airlineIconView}>
           <AirlinesIcon airlineCode={displayData.airlines[0].airlineCode} />

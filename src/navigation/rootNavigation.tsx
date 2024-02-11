@@ -3,9 +3,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import COLORS from '../constants/colors';
 import {FONTS} from '../constants/common';
-import {BookingIcon, HomeIcon} from '../constants/icons';
+import {BookingIcon, SearchIcon} from '../constants/icons';
 import BookedFlightScreen from '../screens/bookedFlight/BookedFlightScreen';
+import BookingScreen from '../screens/booking/BookingScreen.view';
 import BookingHistoryScreen from '../screens/bookingHistory/BookingHistoryScreen.view';
+import BookingSuccessScreen from '../screens/bookingSuccess/BookingSuccessScreen.view';
 import HomeScreen from '../screens/home/HomeScreen.view';
 import SearchResultsScreen from '../screens/searchResults/SearchResultsScreen.view';
 import {
@@ -19,7 +21,7 @@ const HomeStack = createNativeStackNavigator<HomeNavigationStackType>();
 const Tab = createBottomTabNavigator<TabNavigationStackType>();
 
 const renderHomeIcon = () => {
-  return <HomeIcon height={25} width={25} />;
+  return <SearchIcon height={25} width={25} />;
 };
 
 const renderBookingIcon = () => {
@@ -30,9 +32,11 @@ const TabNavigationStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarStyle: {height: 60},
         headerShown: false,
         tabBarLabelPosition: 'beside-icon',
         tabBarActiveBackgroundColor: COLORS.lightBlue,
+        tabBarInactiveTintColor: COLORS.black,
         tabBarActiveTintColor: COLORS.black,
         tabBarLabelStyle: {fontFamily: FONTS.Medium, fontSize: 18},
       }}>
@@ -40,7 +44,7 @@ const TabNavigationStack = () => {
         name="Home"
         component={HomeNavigationStack}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Search',
           tabBarIcon: renderHomeIcon,
         }}
       />
@@ -58,9 +62,14 @@ const TabNavigationStack = () => {
 
 const HomeNavigationStack = () => {
   return (
-    <HomeStack.Navigator screenOptions={{headerShown: true}}>
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="SearchResults" component={SearchResultsScreen} />
+      <HomeStack.Screen name="Booking" component={BookingScreen} />
+      <HomeStack.Screen
+        name="BookingSuccess"
+        component={BookingSuccessScreen}
+      />
     </HomeStack.Navigator>
   );
 };

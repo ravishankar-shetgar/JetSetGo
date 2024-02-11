@@ -2,8 +2,15 @@ import {FlightInfo} from '../redux/reducers/Flights/Flights.reducer.types';
 
 export type HomeNavigationStackType = {
   HomeScreen: undefined;
-  SearchResults: {userId: string};
+  SearchResults: {
+    fromCityCode: string;
+    toCityCode: string;
+    fromCityName: string;
+    toCityName: string;
+    date: string;
+  };
   Booking: {flightInfo: FlightInfo};
+  BookingSuccess: {flightInfo: FlightInfo};
 };
 
 export type BookingNavigationStackType = {
