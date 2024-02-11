@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import FlightCard from '../../components/FlightCard/FlightCard.view';
+import FlightCardPlaceholder from '../../components/FlightCardPlaceholder/FlightCardPlaceholder.view';
 import Input from '../../components/Input/Input.view';
 import STRINGS from '../../constants/strings';
 import {FlightInfo} from '../../redux/reducers/Flights/Flights.reducer.types';
-import {getAllFlightsData} from '../../redux/selectors';
+import {getAllFlightsData, isLoadingFlights} from '../../redux/selectors';
 import {fetchFlightsAction} from '../../saga/HomeScreen.saga';
 import styles from './HomeScreen.styles';
 
@@ -22,6 +23,7 @@ const renderSeparator = () => <View style={styles.separator} />;
 /**  */
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const flights = useSelector(getAllFlightsData);
+  const isLoading = useSelector(isLoadingFlights);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,15 +47,19 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         placeholder={STRINGS.enterDestination}
       />
 
-      <FlatList
-        renderItem={renderListItem}
-        data={flights}
-        contentContainerStyle={styles.listContentContainer}
-        style={styles.listContainer}
-        keyExtractor={keyExtractor}
-        ItemSeparatorComponent={renderSeparator}
-        keyboardShouldPersistTaps="handled"
-      />
+      {isLoading ? (
+        <FlightCardPlaceholder />
+      ) : (
+        <FlatList
+          renderItem={renderListItem}
+          data={flights}
+          contentContainerStyle={styles.listContentContainer}
+          style={styles.listContainer}
+          keyExtractor={keyExtractor}
+          ItemSeparatorComponent={renderSeparator}
+          keyboardShouldPersistTaps="handled"
+        />
+      )}
     </View>
   );
 };

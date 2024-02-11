@@ -3,10 +3,12 @@ import {FlightInfo} from './Flights.reducer.types';
 
 export interface FlightsState {
   flights: FlightInfo[];
+  isLoading: boolean;
 }
 
 export const INITIAL_STATE: FlightsState = {
   flights: [],
+  isLoading: true,
 };
 
 export const Flights = createSlice({
@@ -17,9 +19,17 @@ export const Flights = createSlice({
       ...state,
       flights: action.payload,
     }),
+    setIsLoading: state => ({
+      ...state,
+      isLoading: true,
+    }),
+    unsetIsLoading: state => ({
+      ...state,
+      isLoading: false,
+    }),
   },
 });
 
-export const {setFlightsData} = Flights.actions;
+export const {setFlightsData, setIsLoading, unsetIsLoading} = Flights.actions;
 
 export default Flights.reducer;
