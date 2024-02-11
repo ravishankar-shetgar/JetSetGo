@@ -3,14 +3,7 @@ import COLORS from '../../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 14,
-  },
-  list: {
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: 50,
   },
   separator: {
     height: 14,
@@ -39,12 +32,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 6,
     borderColor: COLORS.grey200,
+    marginBottom: 2,
   },
   seatsView: {
     flexDirection: 'row',
-    borderWidth: 1,
-    maxWidth: '60%',
+    maxWidth: '55%',
     flexWrap: 'wrap',
+    justifyContent: 'flex-end',
   },
   row: {
     flexDirection: 'row',

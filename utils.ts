@@ -1,4 +1,5 @@
 import moment from 'moment';
+import uuid from 'react-native-uuid';
 
 /** converts text like '2h 20m' into
  * duration in seconds.
@@ -19,4 +20,8 @@ export const textToSeconds = (text: string) => {
     }
   }
   return seconds;
+};
+
+export const getRandomUuid = (): string => {
+  return uuid.v4().toString();
 };

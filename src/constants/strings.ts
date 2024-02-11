@@ -21,6 +21,11 @@ enum STRINGS {
   modifySearchAndTryAgain = 'Please modify your search and try again',
   bookFlight = 'Book Flight',
   bookings = 'Bookings',
+  bookedSeats = 'Booked Seats',
+  totalFare = 'Total Fare',
+  bookedDate = 'Booked Date',
+  terminalNumber = 'Departure Terminal number',
+  airportName = 'Airport name',
 }
 
 export default STRINGS;

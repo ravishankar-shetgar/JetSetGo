@@ -1,5 +1,8 @@
 import {FlightInfo} from '../Flights/Flights.reducer.types';
 
 export interface Booking extends FlightInfo {
-  noOfSeats: number;
+  seats: string[];
+  totalFare: number;
+  bookedDate: string;
+  uuid: string;
 }

@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
       },
     }),
   },
+  altContainer: {
+    backgroundColor: COLORS.white,
+    overflow: 'hidden',
+  },
   airlineInfoRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
