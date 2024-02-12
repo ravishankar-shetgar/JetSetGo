@@ -9,7 +9,7 @@ export enum FONTS {
   Thin = 'Lato-Thin',
 }
 
-export const seatsList = [
+export const SEATS_LIST = [
   ['a1', 'a2'],
   ['b1', 'b2'],
   ['c1', 'c2'],
@@ -20,4 +20,19 @@ export const seatsList = [
   ['c3', 'c4'],
   ['d3', 'd4'],
   ['e3', 'e4'],
+];
+
+export const CITIES_LIST = [
+  {
+    cityCode: 'DEL',
+    cityName: 'Delhi',
+  },
+  {
+    cityCode: 'BOM',
+    cityName: 'Mumbai',
+  },
+  {
+    cityCode: 'MAA',
+    cityName: 'Chennai',
+  },
 ];

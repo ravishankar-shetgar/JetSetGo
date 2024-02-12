@@ -5,7 +5,6 @@ import COLORS from '../constants/colors';
 import {FONTS} from '../constants/common';
 import {BookingIcon, SearchIcon} from '../constants/icons';
 import STRINGS from '../constants/strings';
-import BookedFlightScreen from '../screens/bookedFlight/BookedFlightScreen';
 import BookingScreen from '../screens/booking/BookingScreen.view';
 import BookingHistoryScreen from '../screens/bookingHistory/BookingHistoryScreen.view';
 import BookingSuccessScreen from '../screens/bookingSuccess/BookingSuccessScreen.view';
@@ -33,6 +32,7 @@ const TabNavigationStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {height: 60},
         headerShown: false,
         tabBarLabelPosition: 'beside-icon',
@@ -86,7 +86,6 @@ const BookingsNavigationStack = () => {
         name="BookingHistory"
         component={BookingHistoryScreen}
       />
-      <BookingStack.Screen name="BookedFlight" component={BookedFlightScreen} />
     </BookingStack.Navigator>
   );
 };

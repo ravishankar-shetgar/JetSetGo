@@ -1,6 +1,6 @@
 enum STRINGS {
-  enterSource = 'Enter Source',
-  enterDestination = 'Enter Destination',
+  selectDeparture = 'Select departure city',
+  selectArrival = 'Select arrival city',
   search = 'Search',
   from = 'From',
   to = 'To',
@@ -26,6 +26,11 @@ enum STRINGS {
   terminalNumber = 'Departure Terminal number',
   airportName = 'Airport name',
   selectDate = 'Select Date',
+  apply = 'Apply',
+  cancel = 'Cancel',
+  select = 'Select',
+  enterValidCityCode = 'Please enter valid city code',
+  selectCity = 'Select city',
 }
 
 export default STRINGS;

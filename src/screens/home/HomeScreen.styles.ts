@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 12,
   },
-  datePickerButton: {
+  button: {
     flexDirection: 'row',
     borderWidth: 2,
     borderRadius: 8,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.grey100,
     backgroundColor: COLORS.white,
     paddingLeft: 12,
-    height: 40,
+    height: 50,
   },
 });
 

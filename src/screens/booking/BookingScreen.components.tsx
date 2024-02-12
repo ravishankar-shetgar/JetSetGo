@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import ButtonView from '../../components/Button/Button.view';
 import CText from '../../components/CText/CText.view';
 import COLORS from '../../constants/colors';
-import {seatsList} from '../../constants/common';
+import {SEATS_LIST} from '../../constants/common';
 import STRINGS from '../../constants/strings';
 import styles from './BookingScreen.components.styles';
 
@@ -73,8 +73,8 @@ export const SeatSelector = ({
   selectedSeats: string[];
   setSelectedSeats: (seatNumbers: string[]) => void;
 }) => {
-  const seatsSectionOne = seatsList.slice(0, 5);
-  const seatsSectionTwo = seatsList.slice(5, 10);
+  const seatsSectionOne = SEATS_LIST.slice(0, 5);
+  const seatsSectionTwo = SEATS_LIST.slice(5, 10);
 
   const onPressSeat = (seatNum: string) => {
     const indexOfSelectedSeat = selectedSeats.indexOf(seatNum);

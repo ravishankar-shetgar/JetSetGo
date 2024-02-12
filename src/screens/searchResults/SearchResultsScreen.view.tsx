@@ -1,10 +1,12 @@
 import {NavigationProp, RouteProp} from '@react-navigation/native';
+import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {textToSeconds} from '../../../utils';
 import FlightCard from '../../components/FlightCard/FlightCard.view';
 import FlightsListPlaceHolder from '../../components/FlightsListPlaceholder/FlightsListPlaceholder.view';
+import NoItemsFound from '../../components/NoItemsFound/NoItemsFound.view';
 import {HomeNavigationStackType} from '../../navigation/rootNavigation.types';
 import {FlightInfo} from '../../redux/reducers/Flights/Flights.reducer.types';
 import {getAllFlightsData, isLoadingFlights} from '../../redux/selectors';
@@ -39,28 +41,35 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
   }, [dispatch]);
 
   useEffect(() => {
-    const tempFlightData = [...flights];
+    const tempFlightData = [
+      ...flights.filter(
+        item =>
+          moment(item.displayData.source.depTime).format('DD MMM YYYY') ===
+          params.date,
+      ),
+    ];
 
     if (sortBy === 'duration') {
-      tempFlightData.sort(
-        (a, b) =>
+      tempFlightData.sort((a, b) => {
+        return (
           textToSeconds(a.displayData.totalDuration) -
-          textToSeconds(b.displayData.totalDuration),
-      );
+          textToSeconds(b.displayData.totalDuration)
+        );
+      });
     } else {
       tempFlightData.sort((a, b) => a.fare - b.fare);
     }
 
     if (filterBy === 'non-stop') {
       setFlightsList(
-        tempFlightData.filter(
-          flight => flight.displayData.stopInfo === 'Non stop',
-        ),
+        tempFlightData.filter(flight => {
+          return flight.displayData.stopInfo === 'Non stop';
+        }),
       );
     } else {
       setFlightsList(
         tempFlightData.filter(
-          flight => flight.displayData.stopInfo === '1 stop',
+          flight => flight.displayData.stopInfo === '1 Stop',
         ),
       );
     }
@@ -107,6 +116,7 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
           keyExtractor={keyExtractor}
           ItemSeparatorComponent={renderSeparator}
           keyboardShouldPersistTaps="handled"
+          ListEmptyComponent={NoItemsFound}
         />
       )}
     </View>

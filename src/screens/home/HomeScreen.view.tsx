@@ -1,9 +1,13 @@
 import {NavigationProp} from '@react-navigation/native';
+import moment from 'moment';
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Button from '../../components/Button/Button.view';
 import CText from '../../components/CText/CText.view';
-import Input from '../../components/Input/Input.view';
+import CitySelector from '../../components/CitySelector/CitySelector.view';
+import DateSelectorModal from '../../components/DateSelectorModal/DateSelectorModal.view';
+import {CITIES_LIST} from '../../constants/common';
+import {AppIcon, Flight} from '../../constants/images';
 import STRINGS from '../../constants/strings';
 import {HomeNavigationStackType} from '../../navigation/rootNavigation.types';
 import styles from './HomeScreen.styles';
@@ -12,46 +16,125 @@ interface HomeScreenProps {
   navigation: NavigationProp<HomeNavigationStackType>;
 }
 
+const getCityNameFromCode = (code: string) => {
+  return CITIES_LIST.find(item => item.cityCode === code)?.cityName || '';
+};
+
 /**  */
 const HomeScreen: React.FC<HomeScreenProps> = props => {
   const {navigation} = props;
 
-  const [sourceInput, setSourceInput] = useState('');
-  const [destinationInput, setDestinationInput] = useState('');
+  const [departureCity, setDepartureCity] = useState('');
+  const [arrivalCity, setArrivalCity] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCitySelector, setShowCitySelector] = useState<
+    'source' | 'dest' | ''
+  >('');
 
   const onPressSearch = () => {
     navigation.navigate('SearchResults', {
-      fromCityCode: 'DEL',
-      fromCityName: 'Delhi',
-      toCityCode: 'BOM',
-      toCityName: 'Mumbai',
-      date: '31 Mar 2023',
+      fromCityCode: departureCity,
+      fromCityName: getCityNameFromCode(departureCity),
+      toCityCode: arrivalCity,
+      toCityName: getCityNameFromCode(arrivalCity),
+      date: moment(selectedDate).format('DD MMM YYYY'),
     });
+
+    setDepartureCity('');
+    setArrivalCity('');
+    setSelectedDate('');
+  };
+
+  const closeCalendar = () => {
+    setShowCalendar(false);
+  };
+
+  const onPressSelectDate = () => {
+    setShowCalendar(true);
+  };
+
+  const onPressSelectDepartureCity = () => {
+    setShowCitySelector('source');
+  };
+  const onPressSelectArrivalCity = () => {
+    setShowCitySelector('dest');
+  };
+
+  const closeCitySelector = () => {
+    setShowCitySelector('');
   };
 
   return (
     <View style={styles.container}>
-      <CText variant="Header1">Hi,</CText>
-      <CText variant="Header1">Ravishankar</CText>
+      <View style={styles.header}>
+        <Image source={AppIcon} style={styles.appIcon} />
+        <CText variant="Header1">JetSetGo</CText>
+      </View>
 
-      <Input
-        value={sourceInput}
-        setInputValue={setSourceInput}
-        placeholder={STRINGS.enterSource}
-        inputValidator={text => text.includes('rv')}
-      />
+      <View style={styles.vSpacer} />
 
-      <Input
-        value={destinationInput}
-        setInputValue={setDestinationInput}
-        placeholder={STRINGS.enterDestination}
-      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPressSelectDepartureCity}>
+        <CText variant="Header5" fontWeight="600">
+          {departureCity.length > 0 ? departureCity : STRINGS.selectDeparture}
+        </CText>
+      </TouchableOpacity>
+
+      <View style={styles.vSpacer} />
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPressSelectArrivalCity}>
+        <CText variant="Header5" fontWeight="600">
+          {arrivalCity.length > 0 ? arrivalCity : STRINGS.selectArrival}
+        </CText>
+      </TouchableOpacity>
+
+      <View style={styles.vSpacer} />
+
+      <TouchableOpacity style={styles.button} onPress={onPressSelectDate}>
+        <CText variant="Header5" fontWeight="600">
+          {selectedDate.length > 0
+            ? moment(selectedDate).format('DD MMM YYYY')
+            : STRINGS.selectDate}
+        </CText>
+      </TouchableOpacity>
+
+      <View style={styles.vSpacer} />
 
       <Button
         title={STRINGS.search}
         onPress={onPressSearch}
-        variant="enabled"
+        variant={
+          arrivalCity.length > 0 &&
+          departureCity.length > 0 &&
+          selectedDate.length > 0
+            ? 'enabled'
+            : 'disabled'
+        }
       />
+
+      <View style={styles.spacer} />
+      <Image source={Flight} style={styles.footerImage} />
+
+      {showCalendar ? (
+        <DateSelectorModal
+          closeModal={closeCalendar}
+          setDate={setSelectedDate}
+        />
+      ) : null}
+
+      {showCitySelector.length > 0 ? (
+        <CitySelector
+          citiesList={CITIES_LIST}
+          closeModal={closeCitySelector}
+          setArrivalCity={setArrivalCity}
+          inputType={showCitySelector}
+          setDepartureCity={setDepartureCity}
+        />
+      ) : null}
     </View>
   );
 };
