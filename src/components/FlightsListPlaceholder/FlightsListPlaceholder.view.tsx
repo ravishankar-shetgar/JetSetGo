@@ -79,4 +79,4 @@ const FlightsListPlaceHolder = () => {
   );
 };
 
-export default FlightsListPlaceHolder;
+export default React.memo(FlightsListPlaceHolder);

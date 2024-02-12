@@ -79,4 +79,4 @@ const BookedFlightCard: React.FC<BookedFlightCardProps> = props => {
   );
 };
 
-export default BookedFlightCard;
+export default React.memo(BookedFlightCard);

@@ -86,4 +86,4 @@ const CitySelector: React.FC<CitySelectorProps> = props => {
   );
 };
 
-export default CitySelector;
+export default React.memo(CitySelector);

@@ -19,4 +19,4 @@ const NoItemsFound = () => {
   );
 };
 
-export default NoItemsFound;
+export default React.memo(NoItemsFound);

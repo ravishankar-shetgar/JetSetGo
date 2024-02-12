@@ -28,7 +28,6 @@ export function* onHomeScreen() {
     } else {
       yield put(setFlightsData([]));
     }
-    // yield delay(2000); // TODO: remove
     yield put(unsetIsLoading());
   }
 }

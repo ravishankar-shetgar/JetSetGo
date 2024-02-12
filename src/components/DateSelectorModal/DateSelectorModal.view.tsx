@@ -84,4 +84,4 @@ const DateSelectorModal: React.FC<DateSelectorModalProps> = props => {
   );
 };
 
-export default DateSelectorModal;
+export default React.memo(DateSelectorModal);
