@@ -1,10 +1,15 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import CText from '../../components/CText/CText.view';
 import COLORS from '../../constants/colors';
+import {AirIndia, SpiceJet} from '../../constants/images';
 import STRINGS from '../../constants/strings';
 import styles from './SearchResultsScreen.styles';
-import {FilterOptionsType, SortOptionsType} from './SearchResultsScreen.view';
+import {
+  FilterByAirlineType,
+  FilterOptionsType,
+  SortOptionsType,
+} from './SearchResultsScreen.view';
 
 export const AirportName = ({
   cityName,
@@ -62,6 +67,8 @@ export const Header = ({
   sortBy,
   filterBy,
   onPressFilterOption,
+  filterByAirline,
+  onPressFilterByAirlineOption,
 }: {
   fromCityCode: string;
   fromCityName: string;
@@ -72,6 +79,8 @@ export const Header = ({
   sortBy: SortOptionsType;
   filterBy: FilterOptionsType;
   onPressFilterOption: (filterBy: string) => void;
+  filterByAirline: FilterByAirlineType;
+  onPressFilterByAirlineOption: (filterBy: string) => void;
 }) => {
   return (
     <>
@@ -147,6 +156,32 @@ export const Header = ({
             onPress={onPressFilterOption}
             value={'one-stop'}
           />
+
+          <View style={styles.airlinesView}>
+            <TouchableOpacity
+              onPress={() => onPressFilterByAirlineOption('JetSpice')}
+              style={[
+                styles.iconView,
+                filterByAirline === 'JetSpice'
+                  ? {backgroundColor: COLORS.primaryBlue}
+                  : {},
+              ]}
+              activeOpacity={0.7}>
+              <Image style={styles.airlineImage} source={SpiceJet} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => onPressFilterByAirlineOption('Air India')}
+              style={[
+                styles.iconView,
+                filterByAirline === 'Air India'
+                  ? {backgroundColor: COLORS.primaryBlue}
+                  : {},
+              ]}
+              activeOpacity={0.7}>
+              <Image style={styles.airlineImage} source={AirIndia} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </>

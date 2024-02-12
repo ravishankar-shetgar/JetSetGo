@@ -97,10 +97,28 @@ const styles = StyleSheet.create({
   dateView: {
     borderWidth: 1,
     borderColor: COLORS.grey100,
-    height: 35,
+    height: 55,
     alignItems: 'center',
     backgroundColor: COLORS.white100,
     justifyContent: 'center',
+  },
+  airlinesView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  airlineImage: {
+    height: 35,
+    width: 35,
+  },
+  iconView: {
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.grey200,
+    borderRadius: 8,
+    height: 35,
+    width: 45,
+    overflow: 'hidden',
+    borderWidth: 1,
+    marginLeft: 6,
   },
 });
 

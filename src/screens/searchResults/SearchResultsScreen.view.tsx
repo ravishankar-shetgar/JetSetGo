@@ -22,7 +22,7 @@ const keyExtractor = (data: FlightInfo) => data.id;
 
 export type SortOptionsType = 'fare' | 'duration';
 export type FilterOptionsType = 'non-stop' | 'one-stop';
-
+export type FilterByAirlineType = 'JetSpice' | 'Air India';
 /**  */
 const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
   const {route, navigation} = props;
@@ -33,6 +33,8 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
   const dispatch = useDispatch();
 
   const [sortBy, setSortBy] = useState<SortOptionsType>('fare');
+  const [filterByAirline, setFilterByAirline] =
+    useState<FilterByAirlineType>('JetSpice');
   const [flightsList, setFlightsList] = useState<FlightInfo[]>([]);
   const [filterBy, setFilterBy] = useState<FilterOptionsType>('non-stop');
 
@@ -48,6 +50,11 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
           params.date,
       ),
     ];
+
+    // sort by airline
+    tempFlightData = tempFlightData.filter(
+      item => item.displayData.airlines[0].airlineName === filterByAirline,
+    );
 
     // sort by selected city
     tempFlightData = tempFlightData.filter(
@@ -80,7 +87,7 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
         ),
       );
     }
-  }, [sortBy, filterBy, flights]);
+  }, [sortBy, filterBy, flights, filterByAirline]);
 
   const onPressSortOption = (option: SortOptionsType) => {
     setSortBy(option);
@@ -110,6 +117,8 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
         onPressFilterOption={onPressFilterOption}
         onPressSortOption={onPressSortOption}
         sortBy={sortBy}
+        filterByAirline={filterByAirline}
+        onPressFilterByAirlineOption={setFilterByAirline}
       />
 
       {isLoading ? (
