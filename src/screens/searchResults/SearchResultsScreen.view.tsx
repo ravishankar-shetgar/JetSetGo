@@ -41,13 +41,20 @@ const SearchResultsScreen: React.FC<SearchResultsScreenProps> = props => {
   }, [dispatch]);
 
   useEffect(() => {
-    const tempFlightData = [
+    let tempFlightData = [
       ...flights.filter(
         item =>
           moment(item.displayData.source.depTime).format('DD MMM YYYY') ===
           params.date,
       ),
     ];
+
+    // sort by selected city
+    tempFlightData = tempFlightData.filter(
+      item =>
+        item.displayData.source.airport.cityCode === params.fromCityCode &&
+        item.displayData.destination.airport.cityCode === params.toCityCode,
+    );
 
     if (sortBy === 'duration') {
       tempFlightData.sort((a, b) => {

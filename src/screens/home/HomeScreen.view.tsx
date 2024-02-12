@@ -65,11 +65,17 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
     setShowCitySelector('');
   };
 
+  const allowSearch =
+    arrivalCity.length > 0 &&
+    departureCity.length > 0 &&
+    selectedDate.length > 0 &&
+    arrivalCity !== departureCity;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={AppIcon} style={styles.appIcon} />
-        <CText variant="Header1">JetSetGo</CText>
+        <CText variant="Header1">{STRINGS.appName}</CText>
       </View>
 
       <View style={styles.vSpacer} />
@@ -77,9 +83,20 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
       <TouchableOpacity
         style={styles.button}
         onPress={onPressSelectDepartureCity}>
-        <CText variant="Header5" fontWeight="600">
-          {departureCity.length > 0 ? departureCity : STRINGS.selectDeparture}
-        </CText>
+        {departureCity.length > 0 ? (
+          <>
+            <View style={styles.cityCode}>
+              <CText variant="Header6">{departureCity}</CText>
+            </View>
+            <CText variant="Header6">
+              {getCityNameFromCode(departureCity)}
+            </CText>
+          </>
+        ) : (
+          <CText variant="Header5" fontWeight="600">
+            {STRINGS.selectDeparture}
+          </CText>
+        )}
       </TouchableOpacity>
 
       <View style={styles.vSpacer} />
@@ -87,9 +104,18 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
       <TouchableOpacity
         style={styles.button}
         onPress={onPressSelectArrivalCity}>
-        <CText variant="Header5" fontWeight="600">
-          {arrivalCity.length > 0 ? arrivalCity : STRINGS.selectArrival}
-        </CText>
+        {arrivalCity.length > 0 ? (
+          <>
+            <View style={styles.cityCode}>
+              <CText variant="Header6">{arrivalCity}</CText>
+            </View>
+            <CText variant="Header6">{getCityNameFromCode(arrivalCity)}</CText>
+          </>
+        ) : (
+          <CText variant="Header5" fontWeight="600">
+            {STRINGS.selectArrival}
+          </CText>
+        )}
       </TouchableOpacity>
 
       <View style={styles.vSpacer} />
@@ -107,13 +133,7 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
       <Button
         title={STRINGS.search}
         onPress={onPressSearch}
-        variant={
-          arrivalCity.length > 0 &&
-          departureCity.length > 0 &&
-          selectedDate.length > 0
-            ? 'enabled'
-            : 'disabled'
-        }
+        variant={allowSearch ? 'enabled' : 'disabled'}
       />
 
       <View style={styles.spacer} />

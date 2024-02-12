@@ -25,3 +25,14 @@ export const textToSeconds = (text: string) => {
 export const getRandomUuid = (): string => {
   return uuid.v4().toString();
 };
+
+export const truncateStringInTheEnd = (
+  str: string,
+  maxStringLength: number,
+) => {
+  if (str && str.length > maxStringLength) {
+    return str.slice(0, maxStringLength) + '..';
+  } else {
+    return str;
+  }
+};

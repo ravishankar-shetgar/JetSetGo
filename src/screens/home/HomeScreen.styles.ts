@@ -18,6 +18,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     backgroundColor: COLORS.white,
   },
+  cityCode: {
+    borderWidth: 1,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    marginRight: 8,
+    backgroundColor: COLORS.yellow100,
+  },
   text: {
     padding: 4,
     marginBottom: 12,

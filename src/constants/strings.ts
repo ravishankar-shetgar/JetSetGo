@@ -31,6 +31,7 @@ enum STRINGS {
   select = 'Select',
   enterValidCityCode = 'Please enter valid city code',
   selectCity = 'Select city',
+  appName = 'JetSetGo',
 }
 
 export default STRINGS;

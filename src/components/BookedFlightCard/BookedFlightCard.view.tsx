@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import {truncateStringInTheEnd} from '../../../utils';
 import STRINGS from '../../constants/strings';
 import {Booking} from '../../redux/reducers/Bookings/Bookings.reducer.types';
 import CText from '../CText/CText.view';
@@ -57,7 +58,10 @@ const BookedFlightCard: React.FC<BookedFlightCardProps> = props => {
           </CText>
           <View style={styles.hSpacer} />
           <CText variant="Header5">
-            {data.displayData.source.airport.airportName}
+            {truncateStringInTheEnd(
+              data.displayData.source.airport.airportName,
+              30,
+            )}
           </CText>
         </View>
 
